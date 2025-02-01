@@ -30,30 +30,60 @@
 
 (defpackage trivial-open-browser
   (:use :common-lisp)
-  (:export #:open-browser-through-shell
+  (:export #:*browser-program*
            #:*browser-function*
+           #:open-browser-through-shell
            #:open-browser))
 
 (in-package :trivial-open-browser)
 
-(defparameter +format-string+
-  #+(or win32 mswindows windows)
-  "explorer ~S"
-  #+(or macos darwin)
-  "open ~S"
-  #-(or win32 mswindows macos darwin windows)
-  "xdg-open ~S")
+(defvar *browser-program* (progn
+                            #+(or win32 mswindows windows)
+                            "start"
+                            #+(or macos darwin)
+                            "open"
+                            #-(or win32 mswindows macos darwin windows)
+                            "xdg-open")
+  "The shell command to open a file or URL.
 
-(defun open-browser-through-shell (url)
-  "Run a shell command to open `url`."
-  (uiop:run-program (format nil +format-string+ url)))
+Value has to be a string or ‘nil’.  Default is ‘start’ for Windows,
+‘open’ for Darwin/macOS, and ‘xdg-open’ otherwise.")
+(declaim (type (or simple-string null) *browser-program*))
 
-(defparameter *browser-function* #'open-browser-through-shell
-  "The function that gets called with the URL to open the browser. Defaults to
-  `browser-function`.")
+(defun open-browser-through-shell (location)
+  "Run a shell command to open a file or URL.
 
-(defun open-browser (url)
-  "Open the browser to `url`."
-  (funcall *browser-function* url))
+Argument LOCATION can be a file name or URL (a string).  If
+ LOCATION is a file name containing spaces, it must not be
+ quoted.
+
+Return value is the exit code of the shell command, or ‘nil’
+if ‘*browser-program*’ is ‘nil’.  Please note that there is
+no guarantee that the file or URL is actually opened when
+the exit code indicates success.
+
+Affected by the ‘*browser-program*’ special variable."
+  (check-type location string)
+  (when (stringp *browser-program*)
+    ;; Pass command as a list so that UIOP can quote
+    ;; the arguments properly.
+    (nth-value 2 (uiop:run-program (list *browser-program* location)
+                                   :ignore-error-status t
+                                   :force-shell t))))
+
+(defvar *browser-function* #'open-browser-through-shell
+  "The function that gets called with the file name or URL as argument.
+Default is the ‘open-browser-through-shell’ function, which see.")
+(declaim (type (function (t) t) *browser-function*))
+
+(defun open-browser (location)
+  "Open a file or URL.
+
+Argument LOCATION can be a file name or URL (a string).  If
+ LOCATION is a file name containing spaces, it must not be
+ quoted.
+
+Affected by the ‘*browser-function*’ special variable."
+  (funcall *browser-function* location))
 
 ;;; trivial-open-browser.lisp ends here
