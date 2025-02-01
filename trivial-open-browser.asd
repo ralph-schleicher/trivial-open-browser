@@ -35,7 +35,7 @@
   :homepage "https://github.com/ralph-schleicher/trivial-open-browser"
   :license "MIT"
   :version (:read-file-line "VERSION")
-  :depends-on ("uiop")
+  :depends-on ("trivial-features" "uiop")
   :components ((:file "trivial-open-browser")))
 
 ;;; trivial-open-browser.asd ends here
