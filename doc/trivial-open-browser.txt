@@ -1,0 +1,40 @@
+TRIVIAL-OPEN-BROWSER
+
+Open a file or URL.
+
+                                                              [Special Variable]
+*browser-function*
+   The function that gets called with the file name or URL as argument.
+   Default is the ‘open-browser-through-shell’ function, which see.
+
+                                                              [Special Variable]
+*browser-program*
+   The shell command to open a file or URL.
+
+   Value has to be a string or ‘nil’.  Default is ‘start’ for Windows,
+   ‘open’ for Darwin/macOS, and ‘xdg-open’ otherwise.
+
+                                                                      [Function]
+open-browser (location)
+   Open a file or URL.
+
+   Argument LOCATION can be a file name or URL (a string).  If
+    LOCATION is a file name containing spaces, it must not be
+    quoted.
+
+   Affected by the ‘*browser-function*’ special variable.
+
+                                                                      [Function]
+open-browser-through-shell (location)
+   Run a shell command to open a file or URL.
+
+   Argument LOCATION can be a file name or URL (a string).  If
+    LOCATION is a file name containing spaces, it must not be
+    quoted.
+
+   Return value is the exit code of the shell command, or ‘nil’
+   if ‘*browser-program*’ is ‘nil’.  Please note that there is
+   no guarantee that the file or URL is actually opened when
+   the exit code indicates success.
+
+   Affected by the ‘*browser-program*’ special variable.

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <title>TRIVIAL-OPEN-BROWSER</title>
+  <style type="text/css">
+   *{margin:0;border:0;padding:0}
+   body{color:#000;background-color:#fff;font-family:sans-serif;padding:1em;min-width:46em}
+   a{color:inherit;background-color:transparent;text-decoration:none}
+   table{border-collapse:collapse}
+   div.title{padding:1em}
+   div.subtitle{padding:1em}
+   div.prologue{padding:1em}
+   div.epilogue{padding:1em}
+   span.category{color:#212121;font-style:italic}
+   span.package,span.symbol{color:#212121;font-weight:700;white-space:nowrap}
+   span.lambda-list{color:#616161}
+   span.lambda-list-keyword{color:#388E3C;white-space:nowrap}
+   span.keyword{color:#212121;white-space:nowrap}
+   span.variable{color:#212121;font-style:italic;white-space:nowrap}
+   span.init-form{white-space:nowrap}
+   span.method-specializers{color:#616161}
+   span.method-specializer{color:#212121;white-space:nowrap}
+   span.method-qualifier{color:#212121;white-space:nowrap}
+   span.error{color:#f57c00}
+   div.contents{padding:1em}
+   div.contents-listing{padding:1em}
+   div.contents-listing ul{list-style-type:none}
+   @media all and (min-width:68em){div.contents-listing{column-count:2;column-gap:2em}}
+   div.definition{padding:1em}
+   div.signature{background-color:#F5F5F5;padding:1ex 1em}
+   table.signature td.symbol{text-align:left;vertical-align:baseline;white-space:nowrap;padding-right:.5em}
+   table.signature td.lambda-list{text-align:left;vertical-align:baseline;width:100%}
+   table.signature td.category{text-align:right;vertical-align:baseline;white-space:nowrap;padding-left:1.5em}
+   div.documentation{padding:1em}
+  </style>
+ </head>
+ <body>
+  <div class="title">
+   <h1>TRIVIAL-OPEN-BROWSER</h1>
+  </div>
+  <div class="prologue">
+   <pre>Open a file or URL.</pre>
+  </div>
+  <div class="contents" id="contents">
+   <h2>Contents</h2>
+   <div class="contents-listing">
+    <ul>
+     <li>
+      <a href="#t4dlilwr">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*browser-function*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dxalzrlk">
+       <span class="category">Special Variable</span>
+       <span class="symbol">*browser-program*</span>
+      </a>
+     </li>
+     <li>
+      <a href="#dhkobfia">
+       <span class="category">Function</span>
+       <span class="symbol">open-browser</span>
+      </a>
+     </li>
+     <li>
+      <a href="#t3tn7hrl">
+       <span class="category">Function</span>
+       <span class="symbol">open-browser-through-shell</span>
+      </a>
+     </li>
+    </ul>
+   </div>
+  </div>
+  <div class="dictionary">
+   <div class="definition" id="t4dlilwr">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*browser-function*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The function that gets called with the file name or URL as argument.
+Default is the ‘<a href="#t3tn7hrl"><span class="symbol">open-browser-through-shell</span></a>’ function, which see.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dxalzrlk">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">*browser-program*</span></a></td>
+	<td class="lambda-list"></td>
+	<td class="category"><span class="category">Special Variable</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>The shell command to open a file or URL.
+
+Value has to be a string or ‘nil’.  Default is ‘start’ for Windows,
+‘open’ for Darwin/macOS, and ‘xdg-open’ otherwise.</pre>
+    </div>
+   </div>
+   <div class="definition" id="dhkobfia">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">open-browser</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">location</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Open a file or URL.
+
+Argument LOCATION can be a file name or URL (a string).  If
+ LOCATION is a file name containing spaces, it must not be
+ quoted.
+
+Affected by the ‘<a href="#t4dlilwr"><span class="symbol">*browser-function*</span></a>’ special variable.</pre>
+    </div>
+   </div>
+   <div class="definition" id="t3tn7hrl">
+    <div class="signature">
+     <table class="signature">
+      <colgroup>
+       <col />
+       <col />
+       <col />
+      </colgroup>
+      <tbody>
+       <tr>
+	<td class="symbol"><a href="#contents"><span class="symbol">open-browser-through-shell</span></a></td>
+	<td class="lambda-list"><span class="lambda-list">(<span class="variable">location</span>)</span></td>
+	<td class="category"><span class="category">Function</span></td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <div class="documentation">
+     <pre>Run a shell command to open a file or URL.
+
+Argument LOCATION can be a file name or URL (a string).  If
+ LOCATION is a file name containing spaces, it must not be
+ quoted.
+
+Return value is the exit code of the shell command, or ‘nil’
+if ‘<a href="#dxalzrlk"><span class="symbol">*browser-program*</span></a>’ is ‘nil’.  Please note that there is
+no guarantee that the file or URL is actually opened when
+the exit code indicates success.
+
+Affected by the ‘<a href="#dxalzrlk"><span class="symbol">*browser-program*</span></a>’ special variable.</pre>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
