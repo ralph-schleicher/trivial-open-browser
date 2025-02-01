@@ -39,11 +39,11 @@
 (in-package :trivial-open-browser)
 
 (defvar *browser-program* (progn
-                            #+(or win32 mswindows windows)
+                            #+(or windows)
                             "start"
-                            #+(or macos darwin)
+                            #+(or darwin)
                             "open"
-                            #-(or win32 mswindows macos darwin windows)
+                            #-(or windows darwin)
                             "xdg-open")
   "The shell command to open a file or URL.
 
