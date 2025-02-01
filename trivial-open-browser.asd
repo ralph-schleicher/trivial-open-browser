@@ -30,7 +30,7 @@
 
 (defsystem "trivial-open-browser"
   :description "Open the browser to a URL, on any system."
-  :author "Fernando Borretti"
+  :author "Fernando Borretti <eudoxiahp@gmail.com>"
   :maintainer "Ralph Schleicher <rs@ralph-schleicher.de>"
   :homepage "https://github.com/ralph-schleicher/trivial-open-browser"
   :license "MIT"
