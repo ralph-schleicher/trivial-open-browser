@@ -1,20 +1,36 @@
 # trivial-open-browser
 
-[![Quicklisp](http://quickdocs.org/badge/trivial-open-browser.svg)](http://quickdocs.org/trivial-open-browser/)
+Open a file or URL, on any system.
 
-Open the browser to a URL, on any system.
 
-~~~lisp
-(trivial-open-browser:open-browser "http://www.google.com/")
-~~~
+## Usage
 
-By default, the library runs a shell command to open the browser on Windows,
-Linux and OS X. You can customize this by setting the value of
-`*browser-function*` to a custom function that takes a URL as its argument and
-somehow opens the browser to that URL.
+```
+(trivial-open-browser:open-browser "https://common-lisp.net/")
+```
 
-# License
+By default, the library runs a shell command to open the browser on
+Windows, OS X, and Linux.  You can customize this by setting the value
+of the `*browser-function*` special variable to a function that takes
+a URL as its argument and somehow opens the browser to that URL.  The
+low-level shell command can be customized by setting the value of the
+`*browser-program*` special variable.
 
-Copyright (c) 2014-2015 Fernando Borretti (eudoxiahp@gmail.com)
+The principle applies to plain file names, too.  If the argument to
+the `open-browser` function is a file name, the file should be opened
+in the associated application.  For example,
+
+```
+(trivial-open-browser:open-browser
+ (namestring (merge-pathnames
+              (uiop:parse-unix-namestring "bar/foo.txt")
+              (user-homedir-pathname))))
+```
+
+
+## License
+
+Copyright (C) 2014, 2015, 2016 Fernando Borretti<br>
+Copyright (C) 2025 Ralph Schleicher
 
 Licensed under the MIT License.
