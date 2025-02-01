@@ -33,7 +33,8 @@
   (:export #:*browser-program*
            #:*browser-function*
            #:open-browser-through-shell
-           #:open-browser))
+           #:open-browser)
+  (:documentation "Open a file or URL."))
 
 (in-package :trivial-open-browser)
 
